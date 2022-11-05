@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class TextField extends StatelessWidget {
+class CustTextField extends StatelessWidget {
   final String labelText;
   final String hintText;
   final TextEditingController controller;
   final TextInputType textInputType;
 
-  TextField(
+  CustTextField(
       {required this.labelText,
       required this.hintText,
       required this.controller,
