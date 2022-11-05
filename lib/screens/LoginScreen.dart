@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoginScreen extends StatefulWidget {
+  static String routeName = "/login";
   const LoginScreen({super.key});
 
   @override
@@ -10,6 +11,15 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Container(
+        child: SingleChildScrollView(
+          child: Center(
+              child: Column(
+            children: [],
+          )),
+        ),
+      ),
+    );
   }
 }
