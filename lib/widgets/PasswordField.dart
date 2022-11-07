@@ -27,7 +27,7 @@ class PasswordField extends StatelessWidget {
               right: 15,
               bottom: 10,
             ),
-            child: Icon(obscureText ? Icons.visibility : Icons.visibility_off),
+            child: Icon(obscureText ? Icons.visibility_off : Icons.visibility),
           ),
         ),
         labelText: labelText,
