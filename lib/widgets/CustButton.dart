@@ -16,6 +16,9 @@ class CustButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         fixedSize: const Size(double.maxFinite, 50),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
       ),
       onPressed: onPress,
       child: Row(
