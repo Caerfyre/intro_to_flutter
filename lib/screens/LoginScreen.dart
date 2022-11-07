@@ -49,7 +49,21 @@ class _LoginScreenState extends State<LoginScreen> {
                     CustButton(
                         labelText: "Login",
                         iconData: Icons.login,
-                        onPress: () {})
+                        onPress: () {}),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Center(
+                        child: GestureDetector(
+                      onTap: () {},
+                      child: const Text(
+                        "Don't have an account? Sign Up",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ))
                   ],
                 ),
               ),
