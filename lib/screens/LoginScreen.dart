@@ -29,6 +29,28 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: screenWidth * .9,
                 child: Column(
                   children: [
+                    Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.all(10),
+                      child: const Text(
+                        'Intro To Flutter',
+                        style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 30),
+                      ),
+                    ),
+                    Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.all(10),
+                      child: const Text(
+                        'Login',
+                        style: TextStyle(fontSize: 27),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     CustTextField(
                         labelText: "Email Address",
                         hintText: "Enter Email Address",
