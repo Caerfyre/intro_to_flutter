@@ -3,6 +3,7 @@ import 'package:intro_to_flutter/screens/LoginScreen.dart';
 
 void main() {
   runApp(const MaterialApp(
+    debugShowCheckedModeBanner: false,
     home: LoginScreen(),
   ));
 }
