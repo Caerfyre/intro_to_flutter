@@ -82,7 +82,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     PasswordField(
                       obscureText: obscurePass,
-                      onTap: handleObscurePass,
+                      onTap: () {
+                        setState(() {
+                          obscurePass = !obscurePass;
+                        });
+                      },
                       labelText: "Password",
                       hintText: "Enter Password",
                       controller: passController,
@@ -91,8 +95,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       height: 20,
                     ),
                     PasswordField(
-                        obscureText: obscurePass,
-                        onTap: handleObscurePass2,
+                        obscureText: obscureConPass,
+                        onTap: () {
+                          setState(() {
+                            obscureConPass = !obscureConPass;
+                          });
+                        },
                         labelText: "Confirm Password",
                         hintText: "Confirm Password",
                         controller: cPassController),
@@ -114,17 +122,5 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
     );
-  }
-
-  handleObscurePass() {
-    setState(() {
-      obscurePass = !obscurePass;
-    });
-  }
-
-  handleObscurePass2() {
-    setState(() {
-      obscureConPass = !obscureConPass;
-    });
   }
 }
