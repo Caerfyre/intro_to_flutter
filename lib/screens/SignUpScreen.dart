@@ -114,6 +114,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(
                       height: 20,
                     ),
+                    CustButton(
+                        labelText: "Login",
+                        iconData: Icons.login,
+                        onPress: () {}),
+                    const SizedBox(
+                      height: 20,
+                    ),
                   ],
                 ),
               ),
