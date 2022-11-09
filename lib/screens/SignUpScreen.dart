@@ -121,7 +121,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     CustButton(
                         labelText: "Login",
                         iconData: Icons.login,
-                        onPress: () {}),
+                        onPress: () {
+                          Navigator.pushReplacementNamed(
+                              context, LoginScreen.routeName);
+                        }),
                     const SizedBox(
                       height: 20,
                     ),
