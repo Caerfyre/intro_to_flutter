@@ -1,5 +1,6 @@
 import 'package:bs_flutter_buttons/bs_flutter_buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:intro_to_flutter/screens/SignUpScreen.dart';
 import 'package:intro_to_flutter/widgets/CustTextField.dart';
 import 'package:intro_to_flutter/widgets/PasswordField.dart';
 import 'package:intro_to_flutter/widgets/CustButton.dart';
@@ -77,7 +78,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     Center(
                         child: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.pushReplacementNamed(
+                            context, SignUpScreen.routeName);
+                      },
                       child: const Text(
                         "Don't have an account? Sign Up",
                         style: TextStyle(
