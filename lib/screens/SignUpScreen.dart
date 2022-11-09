@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intro_to_flutter/screens/LoginScreen.dart';
 
 import '../widgets/CustButton.dart';
 import '../widgets/CustTextField.dart';
@@ -110,14 +111,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     CustButton(
                         labelText: "Sign up",
                         iconData: Icons.login_rounded,
-                        onPress: () {}),
+                        onPress: () {
+                          Navigator.pushReplacementNamed(
+                              context, LoginScreen.routeName);
+                        }),
                     const SizedBox(
                       height: 20,
                     ),
                     CustButton(
                         labelText: "Login",
                         iconData: Icons.login,
-                        onPress: () {}),
+                        onPress: () {
+                          Navigator.pushReplacementNamed(
+                              context, LoginScreen.routeName);
+                        }),
                     const SizedBox(
                       height: 20,
                     ),
