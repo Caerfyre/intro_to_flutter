@@ -16,34 +16,31 @@ class _DashboardScreenState extends State<DashboardScreen> {
 
     return Scaffold(
       appBar: AppBar(
-          title: Text("Intro to Flutter Dashboard"),
-          elevation: 30.0,
+          title: const Text("Intro to Flutter Dashboard"),
+          elevation: 10.0,
           actions: [
-            //actions widget in appbar
             IconButton(
-                icon: Icon(Icons.settings),
+                icon: const Icon(Icons.settings),
                 onPressed: () {
                   Navigator.pushNamed(context, SettingsScreen.routeName);
                 }),
           ]),
-      body: Container(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Welcome",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w300),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                "$emailArg",
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
-              ),
-            ],
-          ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              "Welcome",
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w300),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              emailArg,
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+            ),
+          ],
         ),
       ),
     );
