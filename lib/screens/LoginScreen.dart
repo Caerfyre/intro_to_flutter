@@ -88,7 +88,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                       ),
                       const SizedBox(
-                        height: 20,
+                        height: 25,
                       ),
                       Center(
                           child: GestureDetector(
@@ -100,7 +100,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           "Don't have an account? Sign Up",
                           style: TextStyle(
                             fontSize: 18,
-                            color: Colors.blue,
+                            color: Color.fromARGB(255, 28, 115, 185),
                           ),
                         ),
                       ))
