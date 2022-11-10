@@ -5,12 +5,14 @@ class CustTextField extends StatelessWidget {
   final String hintText;
   final TextEditingController controller;
   final TextInputType textInputType;
+  final String errorText;
 
   CustTextField(
       {required this.labelText,
       required this.hintText,
       required this.controller,
-      required this.textInputType});
+      required this.textInputType,
+      required this.errorText});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +26,12 @@ class CustTextField extends StatelessWidget {
         ),
       ),
       controller: controller,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return errorText;
+        }
+        return null;
+      },
     );
   }
 }

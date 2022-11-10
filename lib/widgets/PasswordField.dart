@@ -6,13 +6,17 @@ class PasswordField extends StatelessWidget {
   final String labelText;
   final String hintText;
   final TextEditingController controller;
+  final String errorText;
+  final String? confirmVal;
 
   PasswordField(
       {required this.obscureText,
       required this.onTap,
       required this.labelText,
       required this.hintText,
-      required this.controller});
+      required this.controller,
+      required this.errorText,
+      this.confirmVal});
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +41,15 @@ class PasswordField extends StatelessWidget {
         ),
       ),
       controller: controller,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return errorText;
+        }
+        if (confirmVal != null && value != confirmVal) {
+          return "Passwords do not match";
+        }
+        return null;
+      },
     );
   }
 }
