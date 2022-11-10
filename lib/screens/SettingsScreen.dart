@@ -1,4 +1,3 @@
-import 'package:bs_flutter_buttons/bs_flutter_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_to_flutter/screens/LoginScreen.dart';
 import 'package:intro_to_flutter/widgets/CustButton.dart';
@@ -17,26 +16,24 @@ class _SettingsState extends State<SettingsScreen> {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      appBar: AppBar(title: Text("Settings")),
-      body: Container(
-        child: Center(
-          child: SingleChildScrollView(
-            child: Center(
-              child: Container(
-                width: screenWidth * .9,
-                child: Column(
-                  children: [
-                    CustButton(
-                      labelText: "Logout",
-                      iconData: Icons.logout,
-                      onPress: () {
-                        Navigator.of(context).pushNamedAndRemoveUntil(
-                            LoginScreen.routeName,
-                            (Route<dynamic> route) => false);
-                      },
-                    ),
-                  ],
-                ),
+      appBar: AppBar(title: const Text("Settings"), elevation: 10.0),
+      body: Center(
+        child: SingleChildScrollView(
+          child: Center(
+            child: SizedBox(
+              width: screenWidth * .9,
+              child: Column(
+                children: [
+                  CustButton(
+                    labelText: "Logout",
+                    iconData: Icons.logout,
+                    onPress: () {
+                      Navigator.of(context).pushNamedAndRemoveUntil(
+                          LoginScreen.routeName,
+                          (Route<dynamic> route) => false);
+                    },
+                  ),
+                ],
               ),
             ),
           ),
