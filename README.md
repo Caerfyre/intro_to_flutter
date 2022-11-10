@@ -4,7 +4,7 @@ CIS 2203 - Introduction to Flutter Assignment.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+This project is created by Niña Therese J. Ybas and Francine O. Menchavez.
 
 A few resources to get you started if this is your first Flutter project:
 
