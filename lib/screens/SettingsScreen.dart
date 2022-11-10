@@ -1,6 +1,7 @@
 import 'package:bs_flutter_buttons/bs_flutter_buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:intro_to_flutter/screens/LoginScreen.dart';
+import 'package:intro_to_flutter/widgets/CustButton.dart';
 
 class SettingsScreen extends StatefulWidget {
   static String routeName = "/settings";
@@ -13,26 +14,31 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
+    double screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(title: Text("Settings")),
       body: Container(
         child: Center(
-          child: Wrap(
-            children: [
-              BsButton(
-                margin: EdgeInsets.only(right: 10.0, bottom: 10.0),
-                onPressed: () {
-                  Navigator.of(context).pushNamedAndRemoveUntil(
-                      LoginScreen.routeName, (Route<dynamic> route) => false);
-                },
-                style: BsButtonStyle.primary,
-                size: BsButtonSize(
-                  padding: const EdgeInsets.fromLTRB(8, 5, 8, 5),
+          child: SingleChildScrollView(
+            child: Center(
+              child: Container(
+                width: screenWidth * .9,
+                child: Column(
+                  children: [
+                    CustButton(
+                      labelText: "Logout",
+                      iconData: Icons.logout,
+                      onPress: () {
+                        Navigator.of(context).pushNamedAndRemoveUntil(
+                            LoginScreen.routeName,
+                            (Route<dynamic> route) => false);
+                      },
+                    ),
+                  ],
                 ),
-                prefixIcon: Icons.logout,
-                label: Text('Logout'),
               ),
-            ],
+            ),
           ),
         ),
       ),
