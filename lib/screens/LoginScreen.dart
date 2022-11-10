@@ -1,5 +1,5 @@
-import 'package:bs_flutter_buttons/bs_flutter_buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:intro_to_flutter/screens/DashboardScreen.dart';
 import 'package:intro_to_flutter/screens/SignUpScreen.dart';
 import 'package:intro_to_flutter/widgets/CustTextField.dart';
 import 'package:intro_to_flutter/widgets/PasswordField.dart';
@@ -70,9 +70,15 @@ class _LoginScreenState extends State<LoginScreen> {
                       height: 20,
                     ),
                     CustButton(
-                        labelText: "Login",
-                        iconData: Icons.login,
-                        onPress: () {}),
+                      labelText: "Login",
+                      iconData: Icons.login,
+                      onPress: () {
+                        final emailValue = emailController.text;
+                        Navigator.pushReplacementNamed(
+                            context, DashboardScreen.routeName,
+                            arguments: emailValue);
+                      },
+                    ),
                     const SizedBox(
                       height: 20,
                     ),
