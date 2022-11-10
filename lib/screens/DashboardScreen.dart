@@ -15,17 +15,36 @@ class _DashboardScreenState extends State<DashboardScreen> {
     final emailArg = ModalRoute.of(context)!.settings.arguments as String;
 
     return Scaffold(
-      appBar:
-          AppBar(title: Text("Intro to Flutter"), elevation: 30.0, actions: [
-        //actions widget in appbar
-        IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {
-              Navigator.pushNamed(context, SettingsScreen.routeName);
-            }),
-      ]),
-      body: Center(
-        child: Text("Welcome $emailArg !"),
+      appBar: AppBar(
+          title: Text("Intro to Flutter Dashboard"),
+          elevation: 30.0,
+          actions: [
+            //actions widget in appbar
+            IconButton(
+                icon: Icon(Icons.settings),
+                onPressed: () {
+                  Navigator.pushNamed(context, SettingsScreen.routeName);
+                }),
+          ]),
+      body: Container(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Welcome",
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w300),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "$emailArg",
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
