@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intro_to_flutter/screens/LoginScreen.dart';
+import 'package:intro_to_flutter/services/AuthService.dart';
 import 'package:intro_to_flutter/widgets/CustButton.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -11,6 +12,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsState extends State<SettingsScreen> {
+  AuthService _authService = AuthService();
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
@@ -27,7 +29,8 @@ class _SettingsState extends State<SettingsScreen> {
                   CustButton(
                     labelText: "Logout",
                     iconData: Icons.logout,
-                    onPress: () {
+                    onPress: () async {
+                      await _authService.logout();
                       Navigator.of(context).pushNamedAndRemoveUntil(
                           LoginScreen.routeName,
                           (Route<dynamic> route) => false);
