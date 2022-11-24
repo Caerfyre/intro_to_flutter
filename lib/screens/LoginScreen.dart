@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intro_to_flutter/screens/DashboardScreen.dart';
 import 'package:intro_to_flutter/screens/SignUpScreen.dart';
+import 'package:intro_to_flutter/services/AuthService.dart';
 import 'package:intro_to_flutter/widgets/CustTextField.dart';
 import 'package:intro_to_flutter/widgets/PasswordField.dart';
 import 'package:intro_to_flutter/widgets/CustButton.dart';
@@ -14,6 +15,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  AuthService _authService = AuthService();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -79,12 +81,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         labelText: "Login",
                         iconData: Icons.login,
                         onPress: () {
-                          if (_formKey.currentState!.validate()) {
-                            final emailValue = emailController.text;
-                            Navigator.pushReplacementNamed(
-                                context, DashboardScreen.routeName,
-                                arguments: emailValue);
-                          }
+                          // if (_formKey.currentState!.validate()) {
+                          //   final emailValue = emailController.text;
+                          //   Navigator.pushReplacementNamed(
+                          //       context, DashboardScreen.routeName,
+                          //       arguments: emailValue);
+                          // }
+                          loginWithGoogle();
                         },
                       ),
                       const SizedBox(
@@ -119,5 +122,13 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       obscurePass = !obscurePass;
     });
+  }
+
+  loginWithGoogle() async {
+    try {
+      var user = await _authService.signInWithGoogle();
+      // ignore: use_build_context_synchronously
+      Navigator.pushReplacementNamed(context, DashboardScreen.routeName);
+    } catch (e) {}
   }
 }
