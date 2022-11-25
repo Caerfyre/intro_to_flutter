@@ -5,6 +5,7 @@ import 'package:intro_to_flutter/services/AuthService.dart';
 import 'package:intro_to_flutter/widgets/CustTextField.dart';
 import 'package:intro_to_flutter/widgets/PasswordField.dart';
 import 'package:intro_to_flutter/widgets/CustButton.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
 class LoginScreen extends StatefulWidget {
   static String routeName = "/login";
@@ -20,14 +21,16 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController passController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool obscurePass = true;
+  bool showSpinner = false;
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      body: Container(
-        child: Center(
+      body: Center(
+        child: ModalProgressHUD(
+          inAsyncCall: showSpinner,
           child: SingleChildScrollView(
             child: Center(
               child: Container(
@@ -126,9 +129,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
   loginWithGoogle() async {
     try {
+      setState(() {
+        showSpinner = true;
+      });
       var user = await _authService.signInWithGoogle();
       // ignore: use_build_context_synchronously
       Navigator.pushReplacementNamed(context, DashboardScreen.routeName);
-    } catch (e) {}
+    } catch (e) {
+      print(e.toString());
+    }
+    setState(() {
+      showSpinner = false;
+    });
   }
 }
