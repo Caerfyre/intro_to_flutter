@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intro_to_flutter/models/StorageItem.dart';
 import 'package:intro_to_flutter/screens/DashboardScreen.dart';
 import 'package:intro_to_flutter/screens/SignUpScreen.dart';
 import 'package:intro_to_flutter/services/AuthService.dart';
@@ -6,6 +7,8 @@ import 'package:intro_to_flutter/widgets/CustTextField.dart';
 import 'package:intro_to_flutter/widgets/PasswordField.dart';
 import 'package:intro_to_flutter/widgets/CustButton.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+
+import '../services/StorageService.dart';
 
 class LoginScreen extends StatefulWidget {
   static String routeName = "/login";
@@ -17,6 +20,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   AuthService _authService = AuthService();
+  StorageService _storageService = StorageService();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -24,9 +28,21 @@ class _LoginScreenState extends State<LoginScreen> {
   bool showSpinner = false;
 
   @override
+  void initState() {
+    super.initState();
+    checkStorage();
+  }
+
+  Future<void> checkStorage() async {
+    var accessToken = await _storageService.readData('accessToken');
+    if (accessToken != null) {
+      Navigator.pushReplacementNamed(context, DashboardScreen.routeName);
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-
     return Scaffold(
       body: Center(
         child: ModalProgressHUD(
@@ -94,6 +110,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                       email: emailController.text,
                                       password: passController.text);
                               if (User != null) {
+                                var tokenVal = User.credential?.accessToken;
+                                var accessToken = StorageItem(
+                                    'accessToken', tokenVal.toString());
+                                await _storageService.saveData(accessToken);
                                 // ignore: use_build_context_synchronously
                                 Navigator.pushReplacementNamed(
                                     context, DashboardScreen.routeName,
@@ -153,12 +173,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       Center(
                           child: GestureDetector(
                         onTap: () async {
-                          // loginWithGoogle();
                           try {
                             setState(() {
                               showSpinner = true;
                             });
                             var User = await _authService.signInWithGoogle();
+                            var accessToken = StorageItem('accessToken',
+                                User.credential?.accessToken as String);
+                            await _storageService.saveData(accessToken);
                             // ignore: use_build_context_synchronously
                             Navigator.pushReplacementNamed(
                                 context, DashboardScreen.routeName,
@@ -195,19 +217,14 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  loginWithGoogle() async {
-    try {
-      setState(() {
-        showSpinner = true;
-      });
-      var user = await _authService.signInWithGoogle();
-      // ignore: use_build_context_synchronously
-      Navigator.pushReplacementNamed(context, DashboardScreen.routeName);
-    } catch (e) {
-      print(e.toString());
-    }
-    setState(() {
-      showSpinner = false;
-    });
-  }
+  // checkStorage() async {
+  //   try {
+  //     var accessToken = await _storageService.readAllData();
+  //     if (accessToken != null) {
+  //       Navigator.pushReplacementNamed(context, DashboardScreen.routeName);
+  //     }
+  //   } catch (e) {
+  //     print(e.toString());
+  //   }
+  // }
 }
