@@ -83,14 +83,33 @@ class _LoginScreenState extends State<LoginScreen> {
                       CustButton(
                         labelText: "Login",
                         iconData: Icons.login,
-                        onPress: () {
+                        onPress: () async {
                           if (_formKey.currentState!.validate()) {
-                            final emailValue = emailController.text;
-                            Navigator.pushReplacementNamed(
-                                context, DashboardScreen.routeName,
-                                arguments: emailValue);
+                            // final emailValue = emailController.text;
+                            // Navigator.pushReplacementNamed(
+                            //     context, DashboardScreen.routeName,
+                            //     arguments: emailValue);
+                            try {
+                              setState(() {
+                                showSpinner = true;
+                              });
+                              var User =
+                                  await _authService.signInWithEmailandPass(
+                                      email: emailController.text,
+                                      password: passController.text);
+                              if (User != null) {
+                                // ignore: use_build_context_synchronously
+                                Navigator.pushReplacementNamed(
+                                    context, DashboardScreen.routeName,
+                                    arguments: User.user!.email);
+                              }
+                            } catch (e) {
+                              print(e.toString());
+                            }
+                            setState(() {
+                              showSpinner = false;
+                            });
                           }
-                          // loginWithGoogle();
                         },
                       ),
                       const SizedBox(
@@ -115,14 +134,29 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       Center(
                           child: GestureDetector(
-                        onTap: () {
-                          loginWithGoogle();
+                        onTap: () async {
+                          // loginWithGoogle();
+                          try {
+                            setState(() {
+                              showSpinner = true;
+                            });
+                            var User = await _authService.signInWithGoogle();
+                            // ignore: use_build_context_synchronously
+                            Navigator.pushReplacementNamed(
+                                context, DashboardScreen.routeName,
+                                arguments: User.user!.email);
+                          } catch (e) {
+                            print(e.toString());
+                          }
+                          setState(() {
+                            showSpinner = false;
+                          });
                         },
                         child: const Text(
                           "Sign in with Google",
                           style: TextStyle(
                             fontSize: 18,
-                            color: Color.fromARGB(255, 28, 115, 185),
+                            color: Color.fromARGB(255, 185, 59, 28),
                           ),
                         ),
                       ))
