@@ -12,7 +12,7 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
-    final emailArg = ModalRoute.of(context)!.settings.arguments as String;
+    // final emailArg = ModalRoute.of(context)!.settings.arguments as String;
 
     return Scaffold(
       appBar: AppBar(
@@ -30,16 +30,16 @@ class _DashboardScreenState extends State<DashboardScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const Text(
-              "Welcome",
+              "Welcome User!",
               style: TextStyle(fontSize: 22, fontWeight: FontWeight.w300),
             ),
             const SizedBox(
               height: 10,
             ),
-            Text(
-              emailArg,
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
-            ),
+            // Text(
+            //   emailArg,
+            //   style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w400),
+            // ),
           ],
         ),
       ),
