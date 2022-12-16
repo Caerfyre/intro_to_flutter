@@ -84,13 +84,13 @@ class _LoginScreenState extends State<LoginScreen> {
                         labelText: "Login",
                         iconData: Icons.login,
                         onPress: () {
-                          // if (_formKey.currentState!.validate()) {
-                          //   final emailValue = emailController.text;
-                          //   Navigator.pushReplacementNamed(
-                          //       context, DashboardScreen.routeName,
-                          //       arguments: emailValue);
-                          // }
-                          loginWithGoogle();
+                          if (_formKey.currentState!.validate()) {
+                            final emailValue = emailController.text;
+                            Navigator.pushReplacementNamed(
+                                context, DashboardScreen.routeName,
+                                arguments: emailValue);
+                          }
+                          // loginWithGoogle();
                         },
                       ),
                       const SizedBox(
@@ -104,6 +104,22 @@ class _LoginScreenState extends State<LoginScreen> {
                         },
                         child: const Text(
                           "Don't have an account? Sign Up",
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Color.fromARGB(255, 28, 115, 185),
+                          ),
+                        ),
+                      )),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      Center(
+                          child: GestureDetector(
+                        onTap: () {
+                          loginWithGoogle();
+                        },
+                        child: const Text(
+                          "Sign in with Google",
                           style: TextStyle(
                             fontSize: 18,
                             color: Color.fromARGB(255, 28, 115, 185),
