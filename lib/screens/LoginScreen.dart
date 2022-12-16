@@ -85,10 +85,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         iconData: Icons.login,
                         onPress: () async {
                           if (_formKey.currentState!.validate()) {
-                            // final emailValue = emailController.text;
-                            // Navigator.pushReplacementNamed(
-                            //     context, DashboardScreen.routeName,
-                            //     arguments: emailValue);
                             try {
                               setState(() {
                                 showSpinner = true;
@@ -102,6 +98,28 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Navigator.pushReplacementNamed(
                                     context, DashboardScreen.routeName,
                                     arguments: User.user!.email);
+                              } else {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(SnackBar(
+                                  duration: const Duration(seconds: 3),
+                                  content: Container(
+                                    alignment: Alignment.center,
+                                    padding: const EdgeInsets.all(16),
+                                    height: 50,
+                                    decoration: const BoxDecoration(
+                                        color: Colors.red,
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20))),
+                                    child: const Text(
+                                        'Invalid Credentials. Please try again',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500)),
+                                  ),
+                                  backgroundColor:
+                                      // ignore: use_build_context_synchronously
+                                      Theme.of(context).scaffoldBackgroundColor,
+                                ));
                               }
                             } catch (e) {
                               print(e.toString());
