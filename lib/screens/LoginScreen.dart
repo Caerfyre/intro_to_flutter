@@ -35,8 +35,10 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> checkStorage() async {
     var accessToken = await _storageService.readData('accessToken');
-    if (accessToken != null) {
-      Navigator.pushReplacementNamed(context, DashboardScreen.routeName);
+    var email = await _storageService.readData('userEmail');
+    if (accessToken != null && email != null) {
+      Navigator.pushReplacementNamed(context, DashboardScreen.routeName,
+          arguments: email);
     }
   }
 
@@ -111,9 +113,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                       password: passController.text);
                               if (User != null) {
                                 var tokenVal = User.credential?.accessToken;
+                                var emailVal = User.user?.email;
                                 var accessToken = StorageItem(
                                     'accessToken', tokenVal.toString());
+                                var userEmail = StorageItem(
+                                    'userEmail', emailVal.toString());
                                 await _storageService.saveData(accessToken);
+                                await _storageService.saveData(userEmail);
                                 // ignore: use_build_context_synchronously
                                 Navigator.pushReplacementNamed(
                                     context, DashboardScreen.routeName,
@@ -180,7 +186,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             var User = await _authService.signInWithGoogle();
                             var accessToken = StorageItem('accessToken',
                                 User.credential?.accessToken as String);
+                            var userEmail = StorageItem(
+                                'userEmail', User.user?.email as String);
                             await _storageService.saveData(accessToken);
+                            await _storageService.saveData(userEmail);
                             // ignore: use_build_context_synchronously
                             Navigator.pushReplacementNamed(
                                 context, DashboardScreen.routeName,
