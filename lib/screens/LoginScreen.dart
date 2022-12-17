@@ -34,12 +34,22 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> checkStorage() async {
-    var accessToken = await _storageService.readData('accessToken');
-    var email = await _storageService.readData('userEmail');
-    if (accessToken != null && email != null) {
-      Navigator.pushReplacementNamed(context, DashboardScreen.routeName,
-          arguments: email);
+    try {
+      setState(() {
+        showSpinner = true;
+      });
+      var accessToken = await _storageService.readData('accessToken');
+      var email = await _storageService.readData('userEmail');
+      if (accessToken != null && email != null) {
+        Navigator.pushReplacementNamed(context, DashboardScreen.routeName,
+            arguments: email);
+      }
+    } catch (e) {
+      print(e);
     }
+    setState(() {
+      showSpinner = false;
+    });
   }
 
   @override
