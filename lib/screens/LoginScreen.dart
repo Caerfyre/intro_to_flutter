@@ -41,6 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
       var accessToken = await _storageService.readData('accessToken');
       var email = await _storageService.readData('userEmail');
       if (accessToken != null && email != null) {
+        // ignore: use_build_context_synchronously
         Navigator.pushReplacementNamed(context, DashboardScreen.routeName,
             arguments: email);
       }
@@ -56,12 +57,12 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      body: Center(
-        child: ModalProgressHUD(
-          inAsyncCall: showSpinner,
+      body: ModalProgressHUD(
+        inAsyncCall: showSpinner,
+        child: Center(
           child: SingleChildScrollView(
             child: Center(
-              child: Container(
+              child: SizedBox(
                 width: screenWidth * .9,
                 child: Form(
                   key: _formKey,
