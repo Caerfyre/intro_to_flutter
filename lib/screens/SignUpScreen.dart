@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intro_to_flutter/screens/LoginScreen.dart';
+import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 
+import '../services/AuthService.dart';
 import '../widgets/CustButton.dart';
 import '../widgets/CustTextField.dart';
 import '../widgets/PasswordField.dart';
@@ -14,6 +16,7 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  final AuthService _authService = AuthService();
   final TextEditingController fNameController = TextEditingController();
   final TextEditingController lNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -22,6 +25,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _signFormKey = GlobalKey<FormState>();
   bool obscurePass = true;
   bool obscureConPass = true;
+  bool showSpinner = false;
 
   @override
   Widget build(BuildContext context) {
@@ -30,8 +34,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
     return Scaffold(
       body: Container(
         child: Center(
-          child: SingleChildScrollView(
-            child: Center(
+          child: ModalProgressHUD(
+            inAsyncCall: showSpinner,
+            child: SingleChildScrollView(
               child: Container(
                 width: screenWidth * .9,
                 child: Form(
@@ -121,10 +126,55 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       CustButton(
                           labelText: "Sign up",
                           iconData: Icons.login_rounded,
-                          onPress: () {
+                          onPress: () async {
                             if (_signFormKey.currentState!.validate()) {
-                              Navigator.pushReplacementNamed(
-                                  context, LoginScreen.routeName);
+                              try {
+                                setState(() {
+                                  showSpinner = true;
+                                });
+
+                                var register =
+                                    await _authService.registerWithEmailandPass(
+                                        email: emailController.text,
+                                        password: passController.text);
+
+                                if (register != null) {
+                                  // ignore: use_build_context_synchronously
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(SnackBar(
+                                    duration: const Duration(seconds: 3),
+                                    content: Container(
+                                      alignment: Alignment.center,
+                                      padding: const EdgeInsets.all(16),
+                                      height: 50,
+                                      decoration: const BoxDecoration(
+                                          color:
+                                              Color.fromARGB(255, 22, 154, 47),
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(20))),
+                                      child: const Text(
+                                          'Successfully Registered!',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500)),
+                                    ),
+                                    backgroundColor:
+                                        // ignore: use_build_context_synchronously
+                                        Theme.of(context)
+                                            .scaffoldBackgroundColor,
+                                  ));
+                                }
+
+                                // ignore: use_build_context_synchronously
+                                Navigator.pushReplacementNamed(
+                                    context, LoginScreen.routeName);
+                              } catch (e) {
+                                print(e);
+                              }
+
+                              setState(() {
+                                showSpinner = false;
+                              });
                             }
                           }),
                       const SizedBox(
