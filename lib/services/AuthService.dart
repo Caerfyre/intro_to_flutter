@@ -7,6 +7,7 @@ class AuthService {
 
   GoogleSignInAccount? user;
 
+  //Login with google
   Future<UserCredential> signInWithGoogle() async {
     final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
@@ -34,6 +35,7 @@ class AuthService {
     }
   }
 
+  //Register with email and password
   Future logout() async {
     try {
       await emailSignIn.signOut();
