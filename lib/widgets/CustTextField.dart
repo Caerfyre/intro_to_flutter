@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:email_validator/email_validator.dart';
 
 class CustTextField extends StatelessWidget {
   final String labelText;
@@ -29,6 +30,10 @@ class CustTextField extends StatelessWidget {
       validator: (value) {
         if (value == null || value.isEmpty) {
           return errorText;
+        }
+        if (labelText == "Email Address" &&
+            EmailValidator.validate(value) == false) {
+          return "Please enter a valid email address";
         }
         return null;
       },
