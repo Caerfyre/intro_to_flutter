@@ -19,8 +19,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  AuthService _authService = AuthService();
-  StorageService _storageService = StorageService();
+  final AuthService _authService = AuthService();
+  final StorageService _storageService = StorageService();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -235,15 +235,4 @@ class _LoginScreenState extends State<LoginScreen> {
       obscurePass = !obscurePass;
     });
   }
-
-  // checkStorage() async {
-  //   try {
-  //     var accessToken = await _storageService.readAllData();
-  //     if (accessToken != null) {
-  //       Navigator.pushReplacementNamed(context, DashboardScreen.routeName);
-  //     }
-  //   } catch (e) {
-  //     print(e.toString());
-  //   }
-  // }
 }
