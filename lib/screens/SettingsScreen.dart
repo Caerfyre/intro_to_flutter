@@ -49,11 +49,6 @@ class _SettingsState extends State<SettingsScreen> {
                       setState(() {
                         showSpinner = false;
                       });
-                      // await _authService.logout();
-                      // await _storageService.deleteAllData();
-                      // Navigator.of(context).pushNamedAndRemoveUntil(
-                      //     LoginScreen.routeName,
-                      //     (Route<dynamic> route) => false);
                     },
                   ),
                 ],
