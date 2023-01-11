@@ -4,6 +4,8 @@ CIS 2203 - Introduction to Flutter Assignment.
 
 ## Getting Started
 
+intro_to_flutter is a simple flutter application that uses password and google authentication for signing into the application. This project is simply an introduction to Flutter and Firebase for the creators' learning enhancement. This is also in compliance with the course CIS 2203 - Mobile Development.
+
 This project is created by Niña Therese J. Ybas and Francine O. Menchavez.
 
 USAGE:
